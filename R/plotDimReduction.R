@@ -4,8 +4,6 @@ plotDimReduction <- function() {
     'UMAP2' = c(2,4,6)
   )
   return(
-    jsonlite::toJSON(
-      dim_reduction
-    )
+    dim_reduction
   )
 }
