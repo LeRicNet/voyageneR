@@ -21,10 +21,18 @@ plotDimReduction <- function(
     reduction = 'umap',
     color_by = 'celltypes'
 ) {
+
+  # choose the right category
+  if (color_by %in% colnames(acp_sn_meta)) {
+    category = acp_sn_meta[,color_by]
+  } else if (color_by %in% available_genes) {
+    category = expression_matrix[color_by,]
+  }
+
   dim_reduction <- data.frame(
     'Dim1' = as.data.frame(acp_sn_umap)$UMAP_1,
     'Dim2' = as.data.frame(acp_sn_umap)$UMAP_2,
-    'category' = acp_sn_meta[,color_by],
+    'category' = category,
     'color' = .buildColorRamp(color_by)
   )
   return(
@@ -33,9 +41,17 @@ plotDimReduction <- function(
 }
 
 .buildColorRamp <- function(color_by) {
-  original_colors <- c("red", "blue")
-  color_palet <- colorRampPalette(original_colors)
-  color_index <- as.integer(as.factor(acp_sn_meta[,color_by]))
-  colors <- color_palet(max(color_index))
-  return(colors[color_index])
+  if (color_by %in% available_genes) {
+    original_colors <- c("red", "blue")
+    color_palet <- colorRampPalette(original_colors)
+    color_index <- as.integer(as.factor(expression_matrix[color_by,]))
+    colors <- color_palet(max(color_index))
+    return(colors[color_index])
+  } else if (color_by %in% colnames(acp_sn_meta)) {
+    original_colors <- c("green", "orange")
+    color_palet <- colorRampPalette(original_colors)
+    color_index <- as.integer(as.factor(acp_sn_meta[,color_by]))
+    colors <- color_palet(max(color_index))
+    return(colors[color_index])
+  }
 }
