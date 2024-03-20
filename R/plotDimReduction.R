@@ -21,10 +21,6 @@ plotDimReduction <- function(
     reduction = 'umap',
     color_by = 'celltypes'
 ) {
-
-  s.obj <- loadSeuratObject()
-  expression_matrix <- s.obj@assays$integrated@scale.data
-
   # choose the right category
   if (color_by %in% colnames(acp_sn_meta)) {
     category = acp_sn_meta[,color_by]
@@ -42,6 +38,9 @@ plotDimReduction <- function(
     dim_reduction
   )
 }
+
+s.obj <- loadSeuratObject()
+expression_matrix <- s.obj@assays$integrated@scale.data
 
 .buildColorRamp <- function(color_by) {
   if (color_by %in% available_genes) {
