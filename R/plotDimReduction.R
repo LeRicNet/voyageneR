@@ -39,9 +39,6 @@ plotDimReduction <- function(
   )
 }
 
-s.obj <<- loadSeuratObject()
-expression_matrix <<- s.obj@assays$integrated@scale.data
-
 .buildColorRamp <- function(color_by) {
   if (color_by %in% available_genes) {
     original_colors <- c("red", "blue")
