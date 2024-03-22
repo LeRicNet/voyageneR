@@ -12,6 +12,7 @@ LazyData: true
 Imports: 
     grDevices,
     jsonlite,
+    qs,
     Seurat
 RoxygenNote: 7.3.1
 Depends: 
