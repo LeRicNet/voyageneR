@@ -8,3 +8,8 @@ getIdentities <- function() {
     'identities' = cnames
   ))
 }
+
+getGenes <- function() {
+  genes <- rownames(seurat_object)
+  return(genes)
+}
