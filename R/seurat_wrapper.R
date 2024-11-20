@@ -25,7 +25,7 @@ SeuratClass <- R6Class("SeuratClass",
 
 # Function to create an instance and cache it
 initialize_seurat <- function(seurat_data) {
-  seurat_obj <- CreateSeuratObject(counts = seurat_data)
+  seurat_obj <- loadSeuratObject()
   seurat_instance <- SeuratClass$new(seurat_obj)
   saveCache(seurat_instance, key = "seurat_instance")
   return("Session initialized")
