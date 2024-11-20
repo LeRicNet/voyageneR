@@ -3,7 +3,7 @@ library(Seurat)
 
 # Define a global environment to store the Seurat object
 if (!exists("seurat_env", envir = .GlobalEnv)) {
-  .GlobalEnv$seurat_env <- new.env()
+  seurat_env <- new.env()
 }
 
 
