@@ -2,10 +2,10 @@ library(R6)
 library(Seurat)
 
 # Define a global environment to store the Seurat object
-if (!exists("seurat_env", envir = .GlobalEnv)) {
-  seurat_env <- new.env()
-  seurat_env$i <- 1
-}
+# if (!exists("seurat_env", envir = .GlobalEnv)) {
+#   seurat_env <- new.env()
+#   seurat_env$i <- 1
+# }
 
 
 # Define the SeuratClass
@@ -44,4 +44,8 @@ get_seurat_identities <- function() {
   }
   seurat_instance <- get("seurat_instance", envir = .GlobalEnv$seurat_env)
   return(seurat_instance$getIdentities())
+}
+
+add_new_env <- function() {
+  .GlobalEnv$seurat_env <- new.env(parent = emptyenv())
 }
