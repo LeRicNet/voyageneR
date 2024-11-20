@@ -13,6 +13,7 @@ Imports:
     grDevices,
     jsonlite,
     qs,
+    R.cache,
     R6,
     Seurat
 RoxygenNote: 7.3.1

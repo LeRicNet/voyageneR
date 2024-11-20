@@ -1,12 +1,6 @@
 library(R6)
 library(Seurat)
-
-# Define a global environment to store the Seurat object
-# if (!exists("seurat_env", envir = .GlobalEnv)) {
-#   seurat_env <- new.env()
-#   seurat_env$i <- 1
-# }
-
+library(R.cache)
 
 # Define the SeuratClass
 SeuratClass <- R6Class("SeuratClass",
@@ -29,23 +23,19 @@ SeuratClass <- R6Class("SeuratClass",
                        )
 )
 
-# Function to create an instance and store it in the persistent environment
-initialize_seurat <- function() {
-  seurat_obj <- loadSeuratObject()
+# Function to create an instance and cache it
+initialize_seurat <- function(seurat_data) {
+  seurat_obj <- CreateSeuratObject(counts = seurat_data)
   seurat_instance <- SeuratClass$new(seurat_obj)
-  assign("seurat_instance", seurat_instance, envir = .GlobalEnv)
+  saveCache(seurat_instance, key = "seurat_instance")
   return("Session initialized")
 }
 
-# Function to get identities using the persistent session
+# Function to get identities using the cached instance
 get_seurat_identities <- function() {
-  if (!exists("seurat_instance", envir = .GlobalEnv)) {
+  seurat_instance <- loadCache(key = "seurat_instance")
+  if (is.null(seurat_instance)) {
     stop("Seurat instance not found. Initialize the session first.")
   }
-  seurat_instance <- get("seurat_instance", envir = .GlobalEnv$seurat_env)
   return(seurat_instance$getIdentities())
-}
-
-add_new_env <- function() {
-  .GlobalEnv$seurat_env <- new.env(parent = emptyenv())
 }
