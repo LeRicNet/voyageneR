@@ -8,7 +8,13 @@
 #' initialize()
 initialize <- function() {
 
-  s.obj <<- loadSeuratObject()
+  seurat_object <- loadSeuratObject()
 
-  expression_matrix <<- s.obj@assays$integrated@scale.data
+  # expression_matrix <<- s.obj@assays$integrated@scale.data
+  assign("seurat_object", seurat_object, envir = .GlobalEnv)
+}
+
+checkEnv <- function() {
+  global_vars <- ls(envir = globalenv())
+  return(global_vars)
 }
