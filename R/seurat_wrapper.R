@@ -27,13 +27,13 @@ SeuratClass <- R6Class("SeuratClass",
 initialize_seurat <- function(seurat_data) {
   seurat_obj <- loadSeuratObject()
   seurat_instance <- SeuratClass$new(seurat_obj)
-  R.cache::saveCache(seurat_instance, key = "seurat_instance")
+  R.cache::saveCache(seurat_instance, key = list("seurat_instance"))
   return("Session initialized")
 }
 
 # Function to get identities using the cached instance
 get_seurat_identities <- function() {
-  seurat_instance <- R.cache::loadCache(key = "seurat_instance")
+  seurat_instance <- R.cache::loadCache(key = list("seurat_instance"))
   if (is.null(seurat_instance)) {
     stop("Seurat instance not found. Initialize the session first.")
   }
