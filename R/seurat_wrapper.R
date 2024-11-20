@@ -33,13 +33,13 @@ SeuratClass <- R6Class("SeuratClass",
 initialize_seurat <- function() {
   seurat_obj <- loadSeuratObject()
   seurat_instance <- SeuratClass$new(seurat_obj)
-  assign("seurat_instance", seurat_instance, envir = .GlobalEnv$seurat_env)
+  assign("seurat_instance", seurat_instance, envir = .GlobalEnv)
   return("Session initialized")
 }
 
 # Function to get identities using the persistent session
 get_seurat_identities <- function() {
-  if (!exists("seurat_instance", envir = .GlobalEnv$seurat_env)) {
+  if (!exists("seurat_instance", envir = .GlobalEnv)) {
     stop("Seurat instance not found. Initialize the session first.")
   }
   seurat_instance <- get("seurat_instance", envir = .GlobalEnv$seurat_env)
