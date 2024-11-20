@@ -27,7 +27,7 @@ SeuratClass <- R6Class("SeuratClass",
 
 # Function to create an instance and store it in the persistent environment
 initialize_seurat <- function(seurat_data) {
-  seurat_obj <- CreateSeuratObject(counts = seurat_data)
+  seurat_obj <- loadSeuratObject(counts = seurat_data)
   seurat_instance <- SeuratClass$new(seurat_obj)
   assign("seurat_instance", seurat_instance, envir = .GlobalEnv$seurat_env)
   return("Session initialized")
