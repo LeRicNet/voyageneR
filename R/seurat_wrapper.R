@@ -2,7 +2,10 @@ library(R6)
 library(Seurat)
 
 # Define a global environment to store the Seurat object
-.GlobalEnv$seurat_env <- new.env()
+if (!exists("seurat_env", envir = .GlobalEnv)) {
+  .GlobalEnv$seurat_env <- new.env()
+}
+
 
 # Define the SeuratClass
 SeuratClass <- R6Class("SeuratClass",
