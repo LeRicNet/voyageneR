@@ -10,6 +10,6 @@
 #'
 loadSeuratObject <- function() {
   # seurat_object <- readRDS("/home/opencpu/data/acp_scn_annotated.rds")
-  seurat_object <- qs::qread("/home/opencpu/data/acp_scn.qs")
+  seurat_object <- qs::qread("/home/opencpu/data/seurat_object.qs")
   return(seurat_object)
 }
