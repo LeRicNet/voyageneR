@@ -27,7 +27,7 @@ SeuratClass <- R6Class("SeuratClass",
 initialize_seurat <- function(seurat_data) {
   seurat_obj <- loadSeuratObject()
   seurat_instance <- SeuratClass$new(seurat_obj)
-  R.cache::setCacheRootPath("/home/opencpu/data/app")
+  R.cache::setCacheRootPath("/home/opencpu/data/")
   R.cache::saveCache(seurat_instance, key = list("seurat_instance"))
   return("Session initialized")
 }
