@@ -54,6 +54,23 @@ plotDimReduction <- function(
 #     return(colors[color_index])
 #   }
 # }
+
+plotViolin <- function(
+    split_by = 'celltypes',
+    color_by = 'SPP1'
+) {
+  value = expression_matrix[color_by,]
+
+  plot_data <- data.frame(
+    'x' = acp_sn_meta[,split_by],
+    'y' = value,
+    'color' = .buildColorRamp(color_by)
+  )
+  return(
+    plot_data
+  )
+}
+
 .buildColorRamp <- function(color_by) {
   if (color_by %in% available_genes) {
     # Use a more visually appealing color scheme from RColorBrewer
