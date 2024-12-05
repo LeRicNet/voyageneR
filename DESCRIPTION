@@ -15,6 +15,7 @@ Imports:
     qs,
     R.cache,
     R6,
+    RColorBrewer,
     Seurat
 RoxygenNote: 7.3.1
 Depends: 
