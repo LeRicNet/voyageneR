@@ -1,8 +1,9 @@
 getIdentities <- function() {
 
-  cnames <- colnames(seurat_object@meta.data)
+  cnames <- colnames(acp_sn_meta)
   cnames <- cnames[!grepl('nCount', cnames)]
   cnames <- cnames[!grepl('nFeature', cnames)]
+  cnames <- c('Gene Expression', cnames)
 
   return(data.frame(
     'identities' = cnames

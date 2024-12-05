@@ -39,18 +39,34 @@ plotDimReduction <- function(
   )
 }
 
+# .buildColorRamp <- function(color_by) {
+#   if (color_by %in% available_genes) {
+#     original_colors <- c("red", "blue")
+#     color_palet <- colorRampPalette(original_colors)
+#     color_index <- as.integer(as.factor(expression_matrix[color_by,]))
+#     colors <- color_palet(max(color_index))
+#     return(colors[color_index])
+#   } else if (color_by %in% colnames(acp_sn_meta)) {
+#     original_colors <- c("green", "orange")
+#     color_palet <- colorRampPalette(original_colors)
+#     color_index <- as.integer(as.factor(acp_sn_meta[,color_by]))
+#     colors <- color_palet(max(color_index))
+#     return(colors[color_index])
+#   }
+# }
 .buildColorRamp <- function(color_by) {
   if (color_by %in% available_genes) {
-    original_colors <- c("red", "blue")
+    # Use a more visually appealing color scheme from RColorBrewer
+    original_colors <- brewer.pal(9, "YlOrRd")  # Yellow-Orange-Red palette
     color_palet <- colorRampPalette(original_colors)
     color_index <- as.integer(as.factor(expression_matrix[color_by,]))
     colors <- color_palet(max(color_index))
     return(colors[color_index])
   } else if (color_by %in% colnames(acp_sn_meta)) {
-    original_colors <- c("green", "orange")
-    color_palet <- colorRampPalette(original_colors)
-    color_index <- as.integer(as.factor(acp_sn_meta[,color_by]))
-    colors <- color_palet(max(color_index))
-    return(colors[color_index])
+    # Use categorical colors from RColorBrewer
+    original_colors <- brewer.pal(8, "Set1")  # Set1 palette for distinct categories
+    color_index <- as.integer(as.factor(acp_sn_meta[, color_by]))
+    colors <- original_colors[color_index]
+    return(colors)
   }
 }
