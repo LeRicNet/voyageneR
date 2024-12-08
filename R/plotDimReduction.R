@@ -82,8 +82,9 @@ plotViolin <- function(
   } else if (color_by %in% colnames(acp_sn_meta)) {
     # Use categorical colors from RColorBrewer
     original_colors <- RColorBrewer::brewer.pal(8, "Set1")  # Set1 palette for distinct categories
+    color_palet <- colorRampPalette(original_colors)
     color_index <- as.integer(as.factor(acp_sn_meta[, color_by]))
-    colors <- original_colors[color_index]
-    return(colors)
+    colors <- color_palet(max(color_index))
+    return(colors[color_index])
   }
 }
